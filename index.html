@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input[type="text"], select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .chart {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .tables {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Analysis</h1>
+        <form method="post">
+            <label for="ticker">Ticker:</label>
+            <input type="text" id="ticker" name="ticker" required>
+
+            <label for="period">Period:</label>
+            <select id="period" name="period" required>
+                <option value="1d">1 day</option>
+                <option value="5d">5 days</option>
+                <option value="1mo">1 month</option>
+                <option value="3mo">3 months</option>
+                <option value="6mo">6 months</option>
+                <option value="1y">1 year</option>
+                <option value="2y">2 years</option>
+                <option value="5y">5 years</option>
+                <option value="10y">10 years</option>
+                <option value="ytd">Year to date</option>
+                <option value="max">Max</option>
+            </select>
+
+            <label for="interval">Interval:</label>
+            <select id="interval" name="interval" required>
+                <option value="1m">1 minute</option>
+                <option value="2m">2 minutes</option>
+                <option value="5m">5 minutes</option>
+                <option value="15m">15 minutes</option>
+                <option value="30m">30 minutes</option>
+                <option value="60m">60 minutes</option>
+                <option value="90m">90 minutes</option>
+                <option value="1d">1 day</option>
+                <option value="5d">5 days</option>
+                <option value="1wk">1 week</option>
+                <option value="1mo">1 month</option>
+                <option value="3mo">3 months</option>
+            </select>
+
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if chart_data %}
+        <div class="chart">
+            <img src="data:image/png;base64,{{ chart_data }}" alt="Candlestick Chart">
+        </div>
+        {% endif %}
+
+        {% if tables %}
+        <div class="tables">
+            {{ tables|safe }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
